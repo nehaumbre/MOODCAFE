@@ -1,7 +1,13 @@
 # 🍵 Mood Café (ムードカフェ)
 ### Modern, Japanese-Inspired Smart Café Web Application with Google Cloud SQL PostgreSQL & Socket.IO
-**Google Cloud Project**: `moodcafe-513406`  
-**GitHub Repository**: [https://github.com/nehaumbre/MOODCAFE](https://github.com/nehaumbre/MOODCAFE)
+
+🌐 **Live Google Cloud Run Production URL**:  
+👉 **[https://mood-cafe-115647138214.us-central1.run.app](https://mood-cafe-115647138214.us-central1.run.app)**
+
+📁 **GitHub Repository**:  
+👉 **[https://github.com/nehaumbre/MOODCAFE](https://github.com/nehaumbre/MOODCAFE)**
+
+☁️ **Google Cloud Project**: `moodcafe-513406` (Region: `us-central1`)
 
 ---
 
@@ -58,48 +64,15 @@ The backend features 8 normalized relational tables executed within transactiona
 
 ---
 
-## ☁️ Google Cloud Run Deployment for `moodcafe-513406`
+## ☁️ Google Cloud Run Deployment
 
-### Option 1: 1-Click CLI Deployment (Recommended)
+The service is actively deployed in `us-central1`:
 ```bash
-# 1. Login to Google Cloud
-gcloud auth login
-
-# 2. Set active project
-gcloud config set project moodcafe-513406
-
-# 3. Enable required Cloud services
-gcloud services enable run.googleapis.com cloudbuild.googleapis.com
-
-# 4. Deploy directly from source to Cloud Run
 gcloud run deploy mood-cafe \
   --source . \
   --region us-central1 \
   --allow-unauthenticated \
   --port 8080
 ```
-
-### Option 2: Deploy from GitHub via Cloud Console
-1. Open the [Google Cloud Run Console for moodcafe-513406](https://console.cloud.google.com/run/create?project=moodcafe-513406).
-2. Select **"Continuously deploy from a repository"**.
-3. Choose repository **`nehaumbre/MOODCAFE`** on branch **`main`**.
-4. Set Port to **`8080`** and check **"Allow unauthenticated invocations"**.
-5. Click **Create**!
-
----
-
-## 💻 Local Execution
-
-```bash
-# Install dependencies
-npm install
-
-# Build client and server
-npm run build
-
-# Start the server (runs on port 8080 with Socket.IO and persistent database)
-npm start
-```
-
-Access the app at:
-👉 **http://localhost:8080**
+- **Service URL**: https://mood-cafe-115647138214.us-central1.run.app
+- **Health Check Probe**: https://mood-cafe-115647138214.us-central1.run.app/api/health
