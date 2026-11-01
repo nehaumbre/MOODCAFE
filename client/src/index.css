@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #FAF8F5;
+    color: #1F2421;
+    font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Washi paper subtle texture effect */
+.washi-pattern {
+  background-color: #FAF8F5;
+  background-image: radial-gradient(#E8DFD5 0.75px, transparent 0.75px), radial-gradient(#E8DFD5 0.75px, #FAF8F5 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Authentic Japanese Shōkenki Ticket Perforations */
+.ticket-perforated {
+  position: relative;
+  background: #FFFDF9;
+}
+
+.ticket-perforated::before,
+.ticket-perforated::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-size: 12px 6px;
+  background-repeat: repeat-x;
+  z-index: 2;
+}
+
+.ticket-perforated::before {
+  top: -3px;
+  background-image: radial-gradient(circle at 6px 0, transparent 4px, #FFFDF9 4.5px);
+}
+
+.ticket-perforated::after {
+  bottom: -3px;
+  background-image: radial-gradient(circle at 6px 6px, transparent 4px, #FFFDF9 4.5px);
+}
+
+/* Hanko (Japanese Seal Stamp) */
+.hanko-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #C7382B;
+  color: #C7382B;
+  border-radius: 6px;
+  font-weight: 700;
+  font-family: 'Noto Serif JP', serif;
+  transform: rotate(-7deg);
+  box-shadow: inset 0 0 0 1px rgba(199, 56, 43, 0.2);
+  user-select: none;
+}
+
+/* Custom Zen Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F4EFEA;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9CCC0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B89270;
+}
