@@ -1,9 +1,7 @@
 # 🍵 Mood Café (ムードカフェ)
 ### Modern, Japanese-Inspired Smart Café Web Application with Google Cloud SQL PostgreSQL & Socket.IO
-
-Mood Café is a modern, Japanese-inspired smart café application embodying the aesthetic principles of **和 (Wa - Harmony)**, **木漏れ日 (Komorebi - Sunlight through leaves)**, and **券売機 (Shōkenki - Precision Ticket Matching)**.
-
-Built with a unified, high-performance Node.js + Express backend, Google Cloud SQL (PostgreSQL) relational storage, Socket.IO real-time event synchronization, and React (Vite) + Tailwind CSS frontend.
+**Google Cloud Project**: `moodcafe-513406`  
+**GitHub Repository**: [https://github.com/nehaumbre/MOODCAFE](https://github.com/nehaumbre/MOODCAFE)
 
 ---
 
@@ -60,63 +58,33 @@ The backend features 8 normalized relational tables executed within transactiona
 
 ---
 
-## ⚙️ Environment Variables Configuration
+## ☁️ Google Cloud Run Deployment for `moodcafe-513406`
 
-Copy `.env.example` to `.env` and configure your credentials:
-
+### Option 1: 1-Click CLI Deployment (Recommended)
 ```bash
-# Server Port
-PORT=8080
-NODE_ENV=production
+# 1. Login to Google Cloud
+gcloud auth login
 
-# --- Google Cloud SQL (PostgreSQL) ---
-# Option 1: Connection string
-DATABASE_URL=postgresql://mood_user:YOUR_PASSWORD@127.0.0.1:5432/mood_cafe
+# 2. Set active project
+gcloud config set project moodcafe-513406
 
-# Option 2: Individual variables
-PGHOST=localhost
-PGPORT=5432
-PGUSER=postgres
-PGPASSWORD=your_password
-PGDATABASE=mood_cafe
-PGSSL=false
+# 3. Enable required Cloud services
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com
 
-# Option 3: Google Cloud Run with Cloud SQL Unix Socket
-# INSTANCE_UNIX_SOCKET=/cloudsql/PROJECT_ID:REGION:INSTANCE_NAME
-```
-
----
-
-## ☁️ Google Cloud SQL & Cloud Run Deployment
-
-### 1. Provision Cloud SQL PostgreSQL Instance
-```bash
-# Create a PostgreSQL instance in Google Cloud SQL
-gcloud sql instances create mood-cafe-db \
-  --database-version=POSTGRES_15 \
-  --tier=db-f1-micro \
-  --region=us-central1
-
-# Create the database
-gcloud sql databases create mood_cafe --instance=mood-cafe-db
-
-# Set a database user and password
-gcloud sql users create mood_user \
-  --instance=mood-cafe-db \
-  --password=YOUR_SECURE_PASSWORD
-```
-
-### 2. Deploy Cloud Run with Cloud SQL Connection
-```bash
-# Deploy to Google Cloud Run with Cloud SQL integration
+# 4. Deploy directly from source to Cloud Run
 gcloud run deploy mood-cafe \
   --source . \
   --region us-central1 \
   --allow-unauthenticated \
-  --port 8080 \
-  --add-cloudsql-instances PROJECT_ID:us-central1:mood-cafe-db \
-  --set-env-vars INSTANCE_UNIX_SOCKET=/cloudsql/PROJECT_ID:us-central1:mood-cafe-db,PGUSER=mood_user,PGPASSWORD=YOUR_SECURE_PASSWORD,PGDATABASE=mood_cafe
+  --port 8080
 ```
+
+### Option 2: Deploy from GitHub via Cloud Console
+1. Open the [Google Cloud Run Console for moodcafe-513406](https://console.cloud.google.com/run/create?project=moodcafe-513406).
+2. Select **"Continuously deploy from a repository"**.
+3. Choose repository **`nehaumbre/MOODCAFE`** on branch **`main`**.
+4. Set Port to **`8080`** and check **"Allow unauthenticated invocations"**.
+5. Click **Create**!
 
 ---
 
